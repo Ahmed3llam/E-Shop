@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="../bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/detail.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="correct-integrity-value" crossorigin="anonymous">
+</head>
+<body>
+    <div class="header">
+        <div class="nav" id="nav">
+            <div class="website">
+                <a href="../index.html">
+                    <img src="../imgs/eshop2.png" id="logo" alt="Logo" />
+                </a>
+            </div>
+            <div class="links">
+                <a href="../index.html">Home</a>
+                <a href="../about/about.html">About</a>
+                <a href="../contact/contact.html">Contact Us</a>
+            </div>
+            <div class="cart">
+                <i class="count" id="count"></i>
+                <a href="../cart/cart.html"><i style="font-size: 24px; cursor: pointer;">🛒</i></a>
+            </div>
+            <a class="icon" onclick="nav()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+    </div>
+    <div class="grid-wrap grid-wrap-fluid grid-wrap-max">
+        <div class="grid-10">
+            <div class="product-details-container">
+                <div class="product-details-show-box">
+                    <div class="images-section">
+                        <div class="details-image-slider">
+                            <div class="image-main-bench">
+                                <img id="image">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="productDetails-box">
+                        <div class="desktop-details"><!---->
+                            <h5 class="title" id="category"></h5>
+                            <p id="title"></p>
+                            <h3>about this item</h3>
+                            <p id="about"></p>
+                        </div>
+                        <div>
+                            <div class="price-offer">
+                                <p class="price" id="price"></p>
+                            </div>
+                        </div>
+                        <div class="cart-btns">
+                            <button class="add-to-cart" id="addToCart"> Add To Cart </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div>
+            <h2>Footer</h2>
+        </div>
+    
+        <div class="social-icons">
+            <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+    <button id="backToTopBtn" title="Go to top" style="font-size: 44px;">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    <script src="./js/detail.js"></script>
+</body>
+</html>
