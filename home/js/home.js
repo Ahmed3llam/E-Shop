@@ -89,6 +89,19 @@ function createProductCard(productData,categoryName) {
             </div>
         </div>
     `;
+    setTimeout(() => {
+        let icon = document.getElementById(`cart_icon-${productData.id}`);
+        if (icon) {
+            for (let i = 0; i < myCard.length; i++) {
+                console.log(myCard[i].id, productData.id);
+                if (myCard[i].id == productData.id) {
+                    console.log("found");
+                    icon.style.display = "none";
+                    break;
+                }
+            }
+        }
+    }, 0);
     return div;
 }
 function getAllProducts() {
@@ -143,6 +156,7 @@ async function addToCart(id) {
     let response = await fetch(`https://json-blush-psi.vercel.app/products/?id=${id}`)
     let data = await response.json();
     addProductToCart(data[0]);
+    getAllProducts();
 }
 function addProductToCart(productData) {
     myCard.push({
