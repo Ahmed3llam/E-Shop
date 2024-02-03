@@ -137,12 +137,12 @@ a{
     display: grid;
     grid-template-columns: 1fr 1fr;
     width: 100%;
+    min-height: 90vh;
 }
 .cart-container .cart-page .cart{
     display: flex;
     gap: 20px;
     flex-direction: column;
-    min-height: 90vh;
 }
 .cart-container .cart-page .cart .cart-card {
     color: #333;
