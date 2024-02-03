@@ -30,6 +30,12 @@ async function getproduct(productId) {
     price.innerHTML=`${data[0].price} $`;
     description.innerHTML=data[0].description;
     getcategory(data[0].category);
+    for (let i = 0; i < myCard.length; i++) {
+        if (myCard[i].id == data[0].id) {
+            document.getElementById("addToCart").style.display = "none";
+            break;
+        }
+    }
 }
 getproduct(productId);
 
@@ -50,6 +56,7 @@ cardbtn.addEventListener('click',
         });
         localStorage.setItem('product',JSON.stringify(myCard));
         updateCardCounter(myCard.length);
+        document.getElementById("addToCart").style.display = "none";
     }
 );
 
