@@ -121,7 +121,7 @@ function submitForm(event) {
             <p>${getCookie("fullName")} , Thank you for contacting us! </p>
         `;
         contacts.innerHTML = `
-            <p>We will get back to you soon! In Your Email ${getCookie("email")} Or In Your Phone ${getCookie("phone")}</p>
+            <p>We will get back to you soon! In Your Email Or In Your Phone ${getCookie("phone")}</p>
         `;
     }
     
