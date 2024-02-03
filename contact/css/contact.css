@@ -124,6 +124,9 @@ a{
         align-items: center;
         margin-top: 50px;
     }
+    .inp-box input{
+        width: 60vw;
+    }
     #contacts{
         font-size: 20px;
     }
@@ -131,7 +134,6 @@ a{
 .inp-box input,textarea{
     box-sizing: border-box;
     margin: 15px;
-    width: 355px;
     height: 77px;
     background:none;
     border: none;
