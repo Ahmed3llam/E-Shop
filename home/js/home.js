@@ -84,7 +84,7 @@ function createProductCard(productData,categoryName) {
             <p class="taitlebarnd" id="brand-${productData.id}">${categoryName}</p>
             <h3 class="taitleProduct">${productData.title}</h3>
             <h4 class="priceProduct">$${productData.price}</h4>
-            <div class="shopping">
+            <div class="shopping" id="cart_icon-${productData.id}">
                 <div class="" onclick="addToCart(${productData.id})">🛒</div>
             </div>
         </div>
