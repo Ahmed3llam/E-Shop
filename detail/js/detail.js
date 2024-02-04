@@ -40,6 +40,7 @@ async function getproduct(productId) {
 getproduct(productId);
 
 /*** 4- card btn */
+
 function updateCardCounter(counter){
     document.getElementById("count").innerHTML = counter;
 }

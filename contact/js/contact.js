@@ -4,7 +4,7 @@ let contactUs=document.getElementById("contactUs");
 let contacts=document.getElementById("contacts");
 document.getElementById("myForm").addEventListener("submit", submitForm);
 document.getElementById("count").innerHTML = myCard.length;
-
+let valid = document.getElementById("valid");
 /*** 2- nav */
 function nav() {
     var navElement = document.getElementById("nav");
@@ -34,78 +34,88 @@ function getCookie(key){
 }
 
 /*** 4- validate inp */
-function reset(){
-    document.getElementById("valid").style.display="none";
-    document.getElementById("messageValid").style.display="none";
+let fullName=document.getElementById("fullName");
+fullName.addEventListener("input", checkName)
+function checkName(){
+    if(fullName.value==""||Number(fullName.value)){
+        fullName.style.border="1px solid red";
+        return false;
+    }
+    else{
+        fullName.style.border="";
+        saveCookie("fullName",fullName.value);
+        return true;
+    }
+}
+let email=document.getElementById("email");
+email.addEventListener("input", checkEmail);
+function checkEmail(){
+    if(! /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email.value)){
+        email.style.border="1px solid red";
+        return false;
+    }
+    else{
+        email.style.border="";
+        saveCookie("email",email.value);
+        return true;
+    }
+}
+let phone=document.getElementById("phone");
+phone.addEventListener("input", checkPhone);
+function checkPhone(){
+    if(! /^01[0125][0-9]{8}$/.test(phone.value)){
+        phone.style.border="1px solid red";
+        return false;
+    }
+    else{
+        phone.style.border="";
+        saveCookie("phone",phone.value);
+        return true;
+    }
+}
+let password=document.getElementById("password");
+password.addEventListener("input", checkPassword);
+function checkPassword(){
+    if(! /^(?=.*[a-zA-Z]).{8,}$/.test(password.value)){
+        password.style.border="1px solid red";
+        return false;
+    }
+    else{
+        password.style.border="";
+        saveCookie("password",password.value);
+        return true;
+    }
+}
+let address=document.getElementById("address");
+address.addEventListener("input", checkAddresses);
+function checkAddresses(){
+    if(address.value==""){
+        address.style.border="1px solid red";
+        return false;
+    }
+    else{
+        address.style.border="";
+        saveCookie("address",address.value);
+        return true;
+    }
+}
+let msg=document.getElementById("message");
+msg.addEventListener("input", checkMsg);
+function checkMsg(){
+    if(msg.value==""){
+        msg.style.border="1px solid red";
+        return false;
+    }
+    else{
+        msg.style.border="";
+        saveCookie("message",msg.value);
+        return true;
+    }
 }
 function check(){
-    reset();
-    let fullName=document.getElementById("fullName").value;
-    let email=document.getElementById("email").value;
-    let phone=document.getElementById("phone").value;
-    let msg=document.getElementById("message").value;
-    let password=document.getElementById("password").value;
-    let address=document.getElementById("address").value;
-    let validState=document.getElementById("valid");
-    function checkName(fullName){
-        if(fullName==""||Number(fullName)){
-            validState.innerHTML=`${fullName} is not valid`;
-            validState.style.display="block";
-            return false;
-        }
-        return true;
-    }
-    function checkEmail(email){
-        if(! /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)){
-            validState.innerHTML=`${email} is not valid`;
-            validState.style.display="block";
-            return false;
-        }
-        return true;
-    }
-    function checkPassword(password){
-        if(! /^(?=.*[a-zA-Z]).{8,}$/.test(password)){
-            validState.innerHTML=`Password value is not valid`;
-            validState.style.display="block";
-            return false;
-        }
-        return true;
-    }
-    function checkAddresses(address) {
-        if(address=="") {
-            validState.innerHTML=`address value is not valid`;
-            validState.style.display="block";
-            return false;
-        }
-        return true;
-    }
-    function checkPhone(phone){
-        if(!/^(010|011|012)\d{8}$/.test(phone)){
-            validState.innerHTML=`${phone} is not valid`;
-            validState.style.display="block";
-            return false;
-        }
-        return true;
-    }
-    function checkMsg(msg){
-        if(msg==""){
-            document.getElementById("messageValid").style.display="block";
-            return false;
-        }
-        return true;
-    }
-    function putCookie(){
-        saveCookie("fullName",fullName);
-        saveCookie("email",email);
-        saveCookie("password",password);
-        saveCookie("Address",address);
-        saveCookie("phone",phone);
-    }
-    if(checkName(fullName)&&checkEmail(email)&&checkPhone(phone)&&
-    checkPassword(password)&&checkAddresses(address)&&checkMsg(msg))
-    {
-        putCookie();
-        reset();
+    valid.style.display="none";
+    if(checkName()&&checkEmail()&&checkPhone()&&checkPassword()&&checkAddresses()&&checkMsg()){
+        valid.style.display="none";
         return true;
     }else{
         return false;
@@ -121,10 +131,13 @@ function submitForm(event) {
             <p>${getCookie("fullName")} , Thank you for contacting us! </p>
         `;
         contacts.innerHTML = `
-            <p>We will get back to you soon! In Your Email Or In Your Phone ${getCookie("phone")}</p>
+            <p>We will get back to you soon! In Your Email <span id="email">${getCookie("email")}</span> Or In Your Phone ${getCookie("phone")}</p>
         `;
     }
-    
+    else{
+        valid.style.display="block";
+        valid.innerHTML="Please Enter Valid Data";
+    }
 }
 
 /*** 6- back to top btn */

@@ -106,78 +106,73 @@ a{
 }
 
 /***********************************/
-.content{
-    height: 100%;
-}
-.inp-box{
+.contact {
+    min-height: 100vh;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    margin-top: 50px;
 }
-@media screen and (max-width: 1150px) {
-    .inp-box{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin-top: 50px;
-    }
-    .inp-box input{
-        width: 60vw;
-    }
-    #contacts{
-        font-size: 20px;
-    }
-}
-.inp-box input,textarea{
-    box-sizing: border-box;
-    margin: 15px;
-    height: 77px;
-    background:none;
-    border: none;
-    border-bottom: 2px solid #898787;
-    border-radius: 8px;
-    font-family: "Tw Cen MT";
-    font-style: italic;
-    font-weight: 400;
-    font-size: 32px;
-    line-height: 35px;
-    color: #898787;
-    padding-left: 10px;
-}
-.span{
+.contact .image {
+    background-size: cover;
+    color: white;
+    flex-basis: 50%;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
     align-items: center;
-    gap: 340px;
-    margin-left: -20px;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
 }
-span{
-    text-align: center;
-    font-family: 'Tw Cen MT';
-    font-style: normal;
-    font-weight: 300;
-    font-size: 25px;
-    line-height: 25px;
-    color: #FF6341;
-    display: none;
+.contact .image::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #677E98;
+    z-index: -1;
 }
-textarea{
-    margin-left: 12vw;
-    width: 75vw;
+.contact .form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-basis: 50%;
+    padding-bottom: 50px;
+}
+.contact .form .input {
+    display: block;
+    width: 100%;
+    margin-bottom: 25px;
+    padding: 15px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    caret-color: #677E98;
+    background: none;
+}
+.contact .form textarea.input {
+    resize: none;
     height: 200px;
 }
-.center{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    align-items: center;
+.contact .form .input:focus {
+    outline: none;
 }
-.center button{
+.contact .content {
+    text-align: center;
+    padding: 0 20px;
+}
+.contact .content h2 {
+    font-size: 40px;
+    letter-spacing: -2px;
+}
+.contact .content p {
+    line-height: 1.6;
+    font-size: 18px;
+    max-width: 500px;
+}
+.contact .content img {
+    width: 300px;
+    max-width: 100%;
+}
+.submit {
     margin-top: 30px;
     width: 200px;
     height: 50px;
@@ -192,35 +187,153 @@ textarea{
     border: none;
     cursor: pointer;
 }
-.texts {
-    font-family: 'Tw Cen MT';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 32px;
-    line-height: 35px;
-    color: #4B4B4B;
-    margin: 20px 55px;
+.submit:hover{
+    transform: scale(1.3);
+    transition: .3s;
+}
+@media (max-width: 991px) {
+    .contact .image {
+        flex-basis: 100%;
+    }
+    .contact .form {
+        flex-basis: 100%;
+    }
+    #email {
+        font-size: 18px;
+    }
 }
 
-/**********footer***********/
-footer {
+
+/*******footer******/
+.footer {
     background-color: #333;
-    color: #fff;
-    padding: 20px;
-    text-align: center;
+    padding: 70px 0 0;
+}
+.footer .container-Footer {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    gap: 40px;
+    justify-content: center;
+}
+.footer .box{
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#first{
     align-items: center;
 }
-.social-icons {
-    margin-top: 10px;
+.footer .box h3 {
+    color: white;
+    font-size: 50px;
+    margin: 0 0 20px;
+    margin-left: 60px;
 }
-.social-icons a {
-    color: #fff;
-    margin: 0 10px;
-    text-decoration: none;
+.footer .box .social {
+    display: flex;
+}
+.footer .box .social li {
+    margin-right: 10px;
+    list-style: none;
+}
+.footer .box .social li a {
+    background-color: #333;
+    color: #b9b9b9;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
     font-size: 20px;
+    transition: 0.3s;
+    text-decoration: none;
+}
+.footer .box .social .facebook:hover {
+    background-color: #1877f2;
+}
+.footer .box .social .twitter:hover {
+    background-color: #1da1f2;
+}
+.footer .box .social .youtube:hover {
+    background-color: #ff0000;
+}
+.footer .box .text {
+    line-height: 2;
+    color: #b9b9b9;
+}
+.footer .box .links-footer ul{
+    text-align: left;
+}
+.footer .box .links-footer li {
+    padding: 15px 0;
+    transition: .3s;
+    list-style: none;
+}
+.footer .box .links-footer li:not(:last-child) {
+    border-bottom: 1px solid #444;
+}
+.footer .box .links-footer li:hover {
+    padding-left: 10px;
+}
+.footer .box .links-footer li:hover a {
+    color: white;
+}
+.footer .box .links-footer li a {
+    color: #b9b9b9;
+    transition: 0.3s;
+    text-decoration: none;
+    text-align: left;
+}
+.footer .box .links-footer li a::before {
+    font-family: "Font Awesome 5 Free";
+    content: "\F101";
+    font-weight: 900;
+    margin-right: 10px;
+    color: #6a6561;
+}
+.footer .box .line {
+    display: flex;
+    align-items: center;
+    color: #b9b9b9;
+    margin-bottom: 30px;
+}
+.footer .box .line i {
+    font-size: 25px;
+    margin-right: 10px;
+}
+.footer .box .line .info {
+    line-height: 1.7;
+    flex: 1;
+}
+.footer .box .line .info span {
+    display: block;
+}
+.footer .copyright {
+    padding: 25px 0;
+    text-align: center;
+    color: white;
+    margin: 50px 0 0;
+    border-top: 1px solid #444;
+}
+@media (max-width: 767px) {
+    .footer .container-Footer{
+        flex-direction: column;
+        align-items: center;
+    }
+    .footer .box .social {
+        justify-content: center;
+    }
+    .footer .box .line {
+        flex-direction: column;
+    }
+    .footer .box .line i {
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    .line{
+        text-align: center;
+    }
 }
 
 /*******movt top************/

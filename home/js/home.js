@@ -73,14 +73,15 @@ async function displayProduct(productsData) {
         }
         let div = createProductCard(productsData[i],categoryName);
         data.append(div);
+        
     }
 }
-function createProductCard(productData,categoryName) {
+function createProductCard(productData, categoryName) {
     let div = document.createElement('div');
     div.setAttribute('class', "cardProduct");
     div.innerHTML = `
         <img class="img-product" src="${productData.image}" onclick="detail(${productData.id})" alt="" />
-        <div class="info" onclick="detail(${productData.id})>
+        <div class="info">
             <p class="taitlebarnd" id="brand-${productData.id}">${categoryName}</p>
             <h3 class="taitleProduct">${productData.title}</h3>
             <h4 class="priceProduct">$${productData.price}</h4>
@@ -93,7 +94,9 @@ function createProductCard(productData,categoryName) {
         let icon = document.getElementById(`cart_icon-${productData.id}`);
         if (icon) {
             for (let i = 0; i < myCard.length; i++) {
+                console.log(myCard[i].id, productData.id);
                 if (myCard[i].id == productData.id) {
+                    console.log("found");
                     icon.style.display = "none";
                     break;
                 }
