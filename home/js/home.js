@@ -1,6 +1,7 @@
 // Initialization
 let count = 1;
 let myCard = JSON.parse(localStorage.product || '[]');
+
 // Function to update card counter
 function updateCardCounter(counter) {
     document.getElementById("count").innerHTML = counter;
@@ -23,6 +24,7 @@ function next() {
     count = (count === 5) ? 1 : count + 1;
     updateImageSource();
 }
+setInterval(() => next(), 5000);
 function updateImageSource() {
     myImg.setAttribute("src", `./imgs/${count}.png`);
 }
@@ -47,15 +49,15 @@ function createCategoryButtons(data, userData) {
     btn.setAttribute("onclick", "getAllProducts()");
     btn.innerHTML = "All";
     data.append(btn);
-
     for (var i = 0; i < userData.length; i++) {
         btn = document.createElement('button');
-        btn.setAttribute("onclick", `show('${userData[i].id}')`);
+        btn.setAttribute("onclick", `show(${userData[i].id})`);
         btn.innerHTML = userData[i].title;
         data.append(btn);
     }
 }
 getCategory();
+
 // Products
 function reset() {
     let data = document.getElementById("products");
@@ -65,24 +67,17 @@ async function displayProduct(productsData) {
     reset();
     let data = document.getElementById("products");
     for (let i = 0; i < productsData.length; i++) {
-        let categoryName;
-        try {
-            categoryName= await getCategoryName(productsData[i].category)
-        } catch (error) {
-            console.error(error);
-        }
-        let div = createProductCard(productsData[i],categoryName);
+        let div = createProductCard(productsData[i]);
         data.append(div);
-        
     }
 }
-function createProductCard(productData, categoryName) {
+function createProductCard(productData) {
     let div = document.createElement('div');
     div.setAttribute('class', "cardProduct");
     div.innerHTML = `
         <img class="img-product" src="${productData.image}" onclick="detail(${productData.id})" alt="" />
         <div class="info">
-            <p class="taitlebarnd" id="brand-${productData.id}">${categoryName}</p>
+            <p class="taitlebarnd" id="brand-${productData.id}">${productData.category}</p>
             <h3 class="taitleProduct">${productData.title}</h3>
             <h4 class="priceProduct">$${productData.price}</h4>
             <div class="shopping" id="cart_icon-${productData.id}">
@@ -94,9 +89,7 @@ function createProductCard(productData, categoryName) {
         let icon = document.getElementById(`cart_icon-${productData.id}`);
         if (icon) {
             for (let i = 0; i < myCard.length; i++) {
-                console.log(myCard[i].id, productData.id);
                 if (myCard[i].id == productData.id) {
-                    console.log("found");
                     icon.style.display = "none";
                     break;
                 }
@@ -127,12 +120,16 @@ function getAllProducts() {
 async function show(id) {
     var buttons = document.getElementsByTagName('button');
     resetButtonColors(buttons);
-    var selectedButton = document.querySelector(`button[onclick="show('${id}')]`);
+    var selectedButton = document.querySelector(`button[onclick="show(${id})]`);
+
     if (selectedButton) {
         selectedButton.style.color = '#FF6341';
+        // selectedButton.disabled = true;
     }
     try {
-        let response = await fetch(`https://json-blush-psi.vercel.app/products/?category=${id}`);
+        let catRespose = await fetch(`https://json-blush-psi.vercel.app/Categories/?id=${id}`);
+        let catData = await catRespose.json();
+        let response = await fetch(`https://json-blush-psi.vercel.app/products/?category=${catData[0].title}`);
         let userData = await response.json();
         displayProduct(userData);
     } catch (error) {
@@ -144,33 +141,49 @@ function resetButtonColors(buttons) {
         buttons[i].style.color = '';
     }
 }
-async function getCategoryName(productId) {
-    let response = await fetch(`https://json-blush-psi.vercel.app/Categories/?id=${productId}`)
-    let data = await response.json();
-    let title = data[0].title;
-    return title;
-}
+// async function getCategoryName(productId) {
+//     let response = await fetch(`https://json-blush-psi.vercel.app/Categories/?id=${productId}`)
+//     let data = await response.json();
+//     let title = data[0].title;
+//     return title;
+// }
 getAllProducts();
 
 // Cart
 async function addToCart(id) {
-    let response = await fetch(`https://json-blush-psi.vercel.app/products/?id=${id}`)
-    let data = await response.json();
-    addProductToCart(data[0]);
-    getAllProducts();
-}
-function addProductToCart(productData) {
-    myCard.push({
-        id: productData.id,
-        title: productData.title,
-        image: productData.image,
-        price: productData.price,
-        category: productData.category,
-        description: productData.description,
-        quantity: 1
-    });
-    localStorage.setItem('product', JSON.stringify(myCard))
-    updateCardCounter(myCard.length);
+    let icon = document.getElementById(`cart_icon-${id}`);
+    icon.style.display = 'none';
+    try{
+        let response = await fetch(`https://json-blush-psi.vercel.app/products/?id=${id}`)
+        let data = await response.json();
+        myCard.push({
+            id: data[0].id,
+            title: data[0].title,
+            image: data[0].image,
+            price: data[0].price,
+            category: data[0].category,
+            description: data[0].description,
+            quantity: 1
+        });
+        localStorage.setItem('product', JSON.stringify(myCard))
+        updateCardCounter(myCard.length);
+        
+        swal({
+            title: "Success",
+            text: "Product added successfully!",
+            icon: "success",
+        });
+        // addProductToCart(data[0]);
+    }
+    catch(err){
+        swal({
+            title: "Error",
+            text: "Product not added!",
+            icon: "error",
+        });
+    }finally{
+        getAllProducts();
+    }
 }
 
 // Detail

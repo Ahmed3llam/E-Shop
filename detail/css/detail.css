@@ -144,6 +144,11 @@ a{
     flex-direction: column;
     justify-content: center;
     align-self: center;
+    cursor: pointer;
+}
+.about .about-content .image:hover {
+    transition: .3s;
+    transform: scale(1.1); /* Scale up by 10% on hover */
 }
 .img{
     background-color: white;

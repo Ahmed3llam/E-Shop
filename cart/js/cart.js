@@ -66,13 +66,42 @@ function show() {
 
 /*** 5- action on items (remove , change quantity) */
 function remove(i) {
-    totalPrice -= (myCard[i].price*myCard[i].quantity);
-    myCard.splice(i, 1);
-    updateLocalStorage();
-    show();
-    if (myCard.length == 0) {
-        window.location.href = `../../index.html`;
-    }
+    swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this item!",
+        icon: "warning",
+        buttons: {
+            cancel: "Cancel",
+            confirm: "Delete",
+        },
+        dangerMode: true,
+    })
+    .then((willDelete) => {
+        if (willDelete) {
+            totalPrice -= (myCard[i].price*myCard[i].quantity);
+            myCard.splice(i, 1);
+            updateLocalStorage();
+            show();
+            // updateTotalDisplay(totalPrice);
+            swal({
+                title: "Success",
+                text: "Product Deleted From Card successfully!",
+                icon: "success",
+            });
+            setTimeout(function() {
+                if (myCard.length == 0) {
+                    window.location.href = `../../index.html`;
+                }   
+            }, 1000);
+            
+        } else {
+            swal({
+                title: "Cancelled",
+                text: "Deleted Cancelled!",
+                icon: "success",
+            });
+        }
+    });
 }
 function sum(id) {
     let value = myCard[id].quantity;

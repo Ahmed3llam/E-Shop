@@ -162,6 +162,7 @@ a{
     width: 180px;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 .cart-container .cart-page .cart .cart-card .cartCard-image img {
     width: 80%;

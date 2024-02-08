@@ -37,7 +37,7 @@ function getCookie(key){
 let fullName=document.getElementById("fullName");
 fullName.addEventListener("input", checkName)
 function checkName(){
-    if(fullName.value==""||Number(fullName.value)){
+    if(fullName.value==""||/[0-9]/.test(fullName.value)){
         fullName.style.border="1px solid red";
         return false;
     }
@@ -89,7 +89,7 @@ function checkPassword(){
 let address=document.getElementById("address");
 address.addEventListener("input", checkAddresses);
 function checkAddresses(){
-    if(address.value==""){
+    if(address.value==""||Number(address.value)){
         address.style.border="1px solid red";
         return false;
     }
@@ -114,11 +114,56 @@ function checkMsg(){
 }
 function check(){
     valid.style.display="none";
-    if(checkName()&&checkEmail()&&checkPhone()&&checkPassword()&&checkAddresses()&&checkMsg()){
-        valid.style.display="none";
-        return true;
-    }else{
+    if(!checkName()){
+        swal({
+            title: "Error",
+            text: "Please enter a valid name (Name Can't have numbers or empty)!",
+            icon: "error",
+        });
         return false;
+    }
+    else if(!checkEmail()){
+        swal({
+            title: "Error",
+            text: "Please enter a valid email (should have @ and .com )!",
+            icon: "error",
+        })
+        return false;
+    }
+    else if(!checkPassword()){
+        swal({
+            title: "Error",
+            text: "Please enter a valid password (at least 8 characters and at least one letter)!",
+            icon: "error",
+        })
+        return false;
+    }
+    else if(!checkPhone()){
+        swal({
+            title: "Error",
+            text: "Please enter a valid phone number 10 digit shart with [010-011-012-015] as (01012345678)!",
+            icon: "error",
+        })
+        return false;
+    }
+    else if(!checkAddresses()){
+        swal({
+            title: "Error",
+            text: "Please enter a valid address!",
+            icon: "error",
+        })
+        return false;
+    }
+    else if(!checkMsg()){
+        swal({
+            title: "Error",
+            text: "Please enter a valid message!",
+            icon: "error",
+        })
+        return false;
+    }
+    else{
+        return true;
     }
 }
 
