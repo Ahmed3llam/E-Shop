@@ -66,9 +66,16 @@ function reset() {
 async function displayProduct(productsData) {
     reset();
     let data = document.getElementById("products");
+    let loaded=productsData.length;
     for (let i = 0; i < productsData.length; i++) {
         let div = createProductCard(productsData[i]);
         data.append(div);
+        loaded--;
+        if(loaded==0){
+            document.getElementById("spiner").style.display="none";
+            document.getElementById("products").style.display="flex";
+            document.getElementById("category").style.display="flex";
+        }
     }
 }
 function createProductCard(productData) {
@@ -141,12 +148,7 @@ function resetButtonColors(buttons) {
         buttons[i].style.color = '';
     }
 }
-// async function getCategoryName(productId) {
-//     let response = await fetch(`https://json-blush-psi.vercel.app/Categories/?id=${productId}`)
-//     let data = await response.json();
-//     let title = data[0].title;
-//     return title;
-// }
+
 getAllProducts();
 
 // Cart

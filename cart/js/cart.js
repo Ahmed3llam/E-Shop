@@ -60,6 +60,9 @@ function show() {
         data.append(div);
         totalPrice +=(myCard[i].price*myCard[i].quantity);
     }
+    if(myCard.length==0){
+        document.getElementById("check").style.display="none";
+    }
     updateLocalStorage();
     updateTotalDisplay(totalPrice);
 }
@@ -143,3 +146,8 @@ document.addEventListener("DOMContentLoaded", function() {
         document.documentElement.scrollTop = 0; 
     });
 });
+
+/******************/
+function shop(){
+    window.location.href = `../../index.html`;
+}

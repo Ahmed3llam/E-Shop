@@ -569,3 +569,26 @@ html::-webkit-scrollbar-track{
 html::-webkit-scrollbar-thumb{
     background-image: linear-gradient(to bottom, #677E98 0%, #61677A 100%);
 }
+#category,#products{
+    display: none;
+}
+#spiner{
+    background: none;
+    border-radius: 50%;
+    border: none;
+    border-top: 1px dotted red;
+    height: 100px;
+    width: 100px;
+    margin: 20px auto;
+    display: block;
+    animation: spiner 1s linear infinite;
+}
+@keyframes spiner {
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+    
+}
