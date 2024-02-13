@@ -178,6 +178,7 @@ function submitForm(event) {
         contacts.innerHTML = `
             <p>We will get back to you soon! In Your Email <span id="email">${getCookie("email")}</span> Or In Your Phone ${getCookie("phone")}</p>
         `;
+        fullName.value = email.value = phone.value = password.value = address.value = msg.value = "";
     }
     else{
         valid.style.display="block";
